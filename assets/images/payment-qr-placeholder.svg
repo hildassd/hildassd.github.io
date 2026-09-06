@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+  <rect width="640" height="640" rx="52" fill="#EFF9FF"/>
+  <rect x="58" y="58" width="524" height="524" rx="36" fill="#ffffff" stroke="#47176D" stroke-width="8"/>
+  <g fill="#47176D">
+    <rect x="104" y="104" width="130" height="130" rx="16"/>
+    <rect x="406" y="104" width="130" height="130" rx="16"/>
+    <rect x="104" y="406" width="130" height="130" rx="16"/>
+  </g>
+  <g fill="#EFF9FF">
+    <rect x="132" y="132" width="74" height="74" rx="10"/>
+    <rect x="434" y="132" width="74" height="74" rx="10"/>
+    <rect x="132" y="434" width="74" height="74" rx="10"/>
+  </g>
+  <g fill="#A5CC2E">
+    <rect x="282" y="112" width="42" height="42" rx="8"/>
+    <rect x="338" y="172" width="58" height="58" rx="8"/>
+    <rect x="274" y="260" width="56" height="56" rx="8"/>
+    <rect x="352" y="278" width="42" height="42" rx="8"/>
+    <rect x="430" y="286" width="52" height="52" rx="8"/>
+    <rect x="268" y="346" width="42" height="42" rx="8"/>
+    <rect x="328" y="380" width="62" height="62" rx="8"/>
+    <rect x="424" y="374" width="44" height="44" rx="8"/>
+    <rect x="486" y="438" width="44" height="44" rx="8"/>
+    <rect x="276" y="476" width="70" height="48" rx="8"/>
+  </g>
+  <text x="320" y="590" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="22"
+        font-weight="700" fill="#47176D">
+    REPLACE WITH YOUR QR CODE
+  </text>
+</svg>

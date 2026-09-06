@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#ff6548"/>
+  <rect x="80" y="80" width="1040" height="560" rx="28" fill="#f3eadc"/>
+  <rect x="140" y="150" width="380" height="190" rx="18" fill="#171613"/>
+  <circle cx="760" cy="245" r="95" fill="#ff6548"/>
+  <rect x="630" y="405" width="370" height="46" rx="23" fill="#171613"/>
+  <rect x="630" y="480" width="250" height="46" rx="23" fill="#d7c9b5"/>
+  <path d="M145 440h390M145 480h300M145 520h340" stroke="#171613" stroke-width="4"/>
+  <text x="145" y="590" font-family="Arial, sans-serif" font-size="18" letter-spacing="5" fill="#171613">SYSTEM / RHYTHM / SPACE</text>
+</svg>

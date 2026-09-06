@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" rx="200" fill="#DCE7EF"/>
+  <circle cx="200" cy="158" r="74" fill="#6589A2" opacity=".90"/>
+  <path d="M78 372c18-104 61-149 122-149s104 45 122 149H78Z" fill="#6589A2" opacity=".90"/>
+  <text x="200" y="211" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="800" fill="#fff">F6</text>
+</svg>

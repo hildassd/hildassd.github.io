@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>此刻 · 小和山猫虫阁</title>
+  <meta name="description" content="记录我现在在哪里、在做什么、在想什么。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/glow.js" defer></script>
+  <script src="assets/now.js" defer></script>
+  <script src="assets/sparks.js" defer></script>
+  <script src="assets/effects.js" defer></script>
+  <script src="assets/i18n.js" defer></script>
+  <script src="assets/theme.js"></script>
+</head>
+
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="home.html">
+        <span class="brand-mark">YN.</span>
+        <span class="brand-name">迷茫杀手兔</span>
+      </a>
+
+      <div class="header-actions">
+        <nav class="nav" aria-label="主要导航">
+          <a class="nav-link" href="home.html">首页</a>
+          <a class="nav-link" href="blog.html">文章</a>
+          <a class="nav-link" href="projects.html">项目</a>
+          <a class="nav-link active" href="now.html">此刻</a>
+          <a class="nav-link" href="sponsor.html">赞助</a>
+          <a class="nav-link" href="about.html">关于</a>
+        </nav>
+
+        <button class="language-toggle" type="button" aria-label="Switch to English" data-language-toggle>EN</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="切换到夜晚模式">☾</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section card-section now-hero glow-target">
+      <p class="eyebrow">NOW / 此刻</p>
+      <h1>正在发生的<br>一些事情。</h1>
+      <p>不做时间线，也不做社交动态。这里只保留我当前的状态。</p>
+    </section>
+
+    <section class="now-status-grid section">
+      <article class="now-status-card glow-target">
+        <span>所在地</span>
+        <strong id="now-location">—</strong>
+        <small>LOCATION</small>
+      </article>
+
+      <article class="now-status-card glow-target">
+        <span>最近专注</span>
+        <strong id="now-focus">—</strong>
+        <small>FOCUS</small>
+      </article>
+
+      <article class="now-status-card glow-target">
+        <span>正在读</span>
+        <strong id="now-reading">—</strong>
+        <small>READING</small>
+      </article>
+
+      <article class="now-status-card glow-target">
+        <span>最近状态</span>
+        <strong id="now-mood">—</strong>
+        <small>STATUS</small>
+      </article>
+    </section>
+
+    <section class="now-public-grid section">
+      <article class="now-main-card glow-target">
+        <p class="section-label">CURRENT NOTE</p>
+        <h2>此刻想说</h2>
+        <div id="now-public-note" class="now-public-note"></div>
+        <div class="now-updated">最后更新：<span id="now-updated">—</span></div>
+      </article>
+
+      <article class="now-side-card glow-target">
+        <p class="section-label">CURRENT LIST</p>
+        <h2>最近</h2>
+        <div id="now-current-list" class="now-current-list"></div>
+      </article>
+    </section>
+
+
+  </main>
+
+<footer class="site-footer simple-footer">
+    <div class="simple-footer-inner">
+      <span>© 2026 YOUR NAME</span>
+      <nav aria-label="页脚导航">
+        <a href="blog.html">文章</a>
+        <a href="projects.html">项目</a>
+        <a href="now.html">此刻</a>
+        <a href="sponsor.html">赞助</a>
+        <a href="about.html">关于</a>
+        <a href="https://github.com/hildassd" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

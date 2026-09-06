@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#f0e7d9"/>
+  <circle cx="840" cy="360" r="260" fill="#ff583b"/>
+  <circle cx="840" cy="360" r="170" fill="#171613"/>
+  <circle cx="840" cy="360" r="90" fill="#f0e7d9"/>
+  <path d="M110 180h480M110 220h360M110 560h450" stroke="#171613" stroke-width="3"/>
+  <text x="110" y="350" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#171613">HELLO,</text>
+  <text x="110" y="430" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#171613">INTERNET.</text>
+</svg>

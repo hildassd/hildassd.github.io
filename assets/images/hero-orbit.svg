@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 780">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff6548"/>
+      <stop offset=".52" stop-color="#ffb49f"/>
+      <stop offset="1" stop-color="#f4e9d9"/>
+    </linearGradient>
+    <radialGradient id="ball">
+      <stop offset="0" stop-color="#fff5df"/>
+      <stop offset=".65" stop-color="#ff8c6e"/>
+      <stop offset="1" stop-color="#c93823"/>
+    </radialGradient>
+  </defs>
+  <rect width="720" height="780" rx="48" fill="url(#bg)"/>
+  <circle cx="360" cy="390" r="240" fill="none" stroke="#171613" stroke-opacity=".22" stroke-width="2"/>
+  <circle cx="360" cy="390" r="176" fill="none" stroke="#171613" stroke-opacity=".22" stroke-width="2"/>
+  <ellipse cx="360" cy="390" rx="300" ry="120" fill="none" stroke="#171613" stroke-opacity=".28" stroke-width="2" transform="rotate(-22 360 390)"/>
+  <ellipse cx="360" cy="390" rx="300" ry="120" fill="none" stroke="#171613" stroke-opacity=".18" stroke-width="2" transform="rotate(38 360 390)"/>
+  <circle cx="360" cy="390" r="112" fill="url(#ball)"/>
+  <circle cx="154" cy="204" r="18" fill="#171613"/>
+  <circle cx="595" cy="506" r="28" fill="#f5efe5" stroke="#171613" stroke-width="3"/>
+  <circle cx="480" cy="190" r="8" fill="#171613"/>
+  <path d="M88 646h176" stroke="#171613" stroke-width="3"/>
+  <path d="M88 666h112" stroke="#171613" stroke-width="3"/>
+  <text x="87" y="622" font-family="Arial, sans-serif" font-size="16" letter-spacing="4" fill="#171613">CURIOUS / 01</text>
+</svg>
