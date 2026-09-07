@@ -4921,7 +4921,7 @@ html[data-theme="dark"] .home-page .card-statement{
   transform:scale(1.03);
   background:
     linear-gradient(rgba(17,30,39,.18),rgba(17,30,39,.34)),
-    url("D:\\大学资料\\博客网站\\shanmao-catworm-blog-killer-rabbit-social\\assets\\images\\初始页面壁纸.jpg") center/cover no-repeat;
+    url("assets\\images\\初始背景一.jpg") center/cover no-repeat;
   transition:opacity .45s ease,transform 6s ease;
 }
 
@@ -6415,11 +6415,11 @@ html[data-theme="dark"] .photo-film-controls button{
 }
 
 html[data-theme="light"] .film-shell{
-  background:#17233A;
+  background:#4A3428;
 }
 
 html[data-theme="dark"] .film-shell{
-  background:#243A47;
+  background:#4A3428;
 }
 
 .film-perforation{
@@ -7653,3 +7653,272 @@ html[data-theme="dark"] .social-account-grid::-webkit-scrollbar-thumb{
     margin-left:12px;
   }
 }
+html[data-theme="light"] body:not(.home-page):not(.entry-page){
+  background:
+    linear-gradient(
+      rgba(245,250,252,.25),
+      rgba(245,250,252,.40)
+    ),
+    url("images\\Day 3 _ 把时间花在喜欢的事上，不算浪费_9_阿丸的独居日记_来自小红书网页版.jpg")
+    center / cover fixed no-repeat !important;
+}
+html[data-theme="dark"] body:not(.home-page):not(.entry-page){
+  background:
+    linear-gradient(
+      rgba(15,28,38,.58),
+      rgba(15,28,38,.72)
+    ),
+    url("images\\希尔达｜月亮饼干碎掉了_1_yangjooo_来自小红书网页版.jpg")
+    center / cover fixed no-repeat !important;
+}
+/* 白天模式：统一卡片透明度 */
+html[data-theme="light"] .card-section,
+html[data-theme="light"] .soft-card,
+html[data-theme="light"] .mini-card,
+html[data-theme="light"] .project-card,
+html[data-theme="light"] .post-card,
+html[data-theme="light"] .now-main-card,
+html[data-theme="light"] .now-side-card,
+html[data-theme="light"] .sponsor-card{
+  background:rgba(255,255,255,.30) !important;
+  backdrop-filter:blur(12px);
+}
+
+
+/* 夜晚模式：统一卡片透明度 */
+html[data-theme="dark"] .card-section,
+html[data-theme="dark"] .soft-card,
+html[data-theme="dark"] .mini-card,
+html[data-theme="dark"] .project-card,
+html[data-theme="dark"] .post-card,
+html[data-theme="dark"] .now-main-card,
+html[data-theme="dark"] .now-side-card,
+html[data-theme="dark"] .sponsor-card{
+  background:rgba(53,83,99,.30) !important;
+  backdrop-filter:blur(12px);
+}
+
+/* 主页白天模式壁纸 */
+html[data-theme="light"] body.home-page{
+  background:
+    linear-gradient(
+      rgba(240,248,250,.25),
+      rgba(240,248,250,.38)
+    ),
+    url("images\\Day 3 _ 把时间花在喜欢的事上，不算浪费_2_阿丸的独居日记_来自小红书网页版.jpg")
+    center / cover fixed no-repeat !important;
+}
+/* 主页黑天模式壁纸 */
+html[data-theme="dark"] body.home-page{
+  background:
+    linear-gradient(
+      rgba(240,248,250,.25),
+      rgba(240,248,250,.38)
+    ),
+    url("images\\Day 3 _ 把时间花在喜欢的事上，不算浪费_2_阿丸的独居日记_来自小红书网页版.jpg")
+    center / cover fixed no-repeat !important;
+}
+
+/* =========================================================
+   全站卡片透明度最终覆盖
+   一定放在 styles.css 最末尾
+   ========================================================= */
+
+
+/* ---------- 白天模式 ---------- */
+
+html[data-theme="light"] body .card-section,
+html[data-theme="light"] body .soft-card,
+html[data-theme="light"] body .mini-card,
+
+html[data-theme="light"] body .post-card:nth-child(n),
+html[data-theme="light"] body .project-card:nth-child(n),
+
+html[data-theme="light"] body .article,
+html[data-theme="light"] body .now-main-card,
+html[data-theme="light"] body .now-side-card,
+html[data-theme="light"] body .now-status-card,
+
+html[data-theme="light"] body .sponsor-card,
+html[data-theme="light"] body .sponsor-note,
+html[data-theme="light"] body .crazy-thursday,
+
+html[data-theme="light"] body .social-contact,
+html[data-theme="light"] body .art-end,
+
+html[data-theme="light"] body .map-card,
+html[data-theme="light"] body .map-list-panel,
+
+html[data-theme="light"] body .home-info-column,
+html[data-theme="light"] body .friend-links{
+  background:rgba(255,255,255,.30) !important;
+
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+
+  box-shadow:
+    0 18px 48px rgba(60,90,110,.10) !important;
+}
+
+
+/* ---------- 夜晚模式 ---------- */
+
+html[data-theme="dark"] body .card-section,
+html[data-theme="dark"] body .soft-card,
+html[data-theme="dark"] body .mini-card,
+
+html[data-theme="dark"] body .post-card:nth-child(n),
+html[data-theme="dark"] body .project-card:nth-child(n),
+
+html[data-theme="dark"] body .article,
+html[data-theme="dark"] body .now-main-card,
+html[data-theme="dark"] body .now-side-card,
+html[data-theme="dark"] body .now-status-card,
+
+html[data-theme="dark"] body .sponsor-card,
+html[data-theme="dark"] body .sponsor-note,
+html[data-theme="dark"] body .crazy-thursday,
+
+html[data-theme="dark"] body .social-contact,
+html[data-theme="dark"] body .art-end,
+
+html[data-theme="dark"] body .map-card,
+html[data-theme="dark"] body .map-list-panel,
+
+html[data-theme="dark"] body .home-info-column,
+html[data-theme="dark"] body .friend-links{
+  background:rgba(53,83,99,.30) !important;
+
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+
+  box-shadow:
+    0 18px 48px rgba(15,30,40,.20) !important;
+}
+/* =========================================================
+   卡片内部的小卡片 / 选项
+   ========================================================= */
+
+/* 友链每一行 */
+html[data-theme="light"] .friend-link-row{
+  background:rgba(255,255,255,.30) !important;
+}
+
+html[data-theme="dark"] .friend-link-row{
+  background:rgba(69,101,116,.30) !important;
+}
+
+
+/* Blog FILTER 按钮 */
+html[data-theme="light"] .filter-tab,
+html[data-theme="light"] .tag-cloud a{
+  background:rgba(255,255,255,.30) !important;
+}
+
+html[data-theme="dark"] .filter-tab,
+html[data-theme="dark"] .tag-cloud a{
+  background:rgba(72,102,116,.30) !important;
+}
+
+
+/* 此刻页面的小状态卡 */
+html[data-theme="light"] .now-status-card{
+  background:rgba(255,255,255,.30) !important;
+}
+
+html[data-theme="dark"] .now-status-card{
+  background:rgba(69,101,116,.30) !important;
+}
+/* =========================================================
+   最终透明度覆盖
+   一定放在 styles.css 最后
+   ========================================================= */
+
+
+/* =========================
+   白天模式
+   ========================= */
+
+/* 首页最上方 HERO 大卡片 */
+html[data-theme="light"] body.home-page .card-hero{
+  background:rgba(255,255,255,.30) !important;
+
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+
+
+/* 首页“关于我”整个大卡片 */
+html[data-theme="light"] body.home-page .home-info-column:first-child{
+  background:rgba(255,255,255,.30) !important;
+
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+
+
+/* 关于我里面 MAJOR / FOCUS / LOCATION 三个小卡片 */
+html[data-theme="light"] body.home-page .profile-list > div{
+  background:rgba(255,255,255,.30) !important;
+
+  -webkit-backdrop-filter:blur(7px);
+  backdrop-filter:blur(7px);
+}
+
+/* Blog 上方 FILTER 整块 */
+html[data-theme="light"] body .tag-cloud.section.soft-card{
+  background:rgba(255,255,255,.30) !important;
+
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+
+
+/* FILTER 里面一个个按钮 */
+html[data-theme="light"] body .filter-tab,
+html[data-theme="light"] body .tag-cloud a{
+  background:rgba(255,255,255,.30) !important;
+}
+
+
+/* 其它项目卡片 */
+html[data-theme="light"] body .project-card:nth-child(n){
+  background:rgba(255,255,255,.30) !important;
+
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+/* =========================
+   夜晚模式
+   ========================= */
+
+html[data-theme="dark"] body.home-page .card-hero,
+html[data-theme="dark"] body.home-page .home-info-column:first-child,
+html[data-theme="dark"] body.home-page .friend-links,
+
+html[data-theme="dark"] body .tag-cloud.section.soft-card,
+html[data-theme="dark"] body .post-list .post-card:nth-child(n),
+html[data-theme="dark"] body .project-card:nth-child(n),
+
+html[data-theme="dark"] body .now-main-card,
+html[data-theme="dark"] body .now-side-card,
+html[data-theme="dark"] body .now-status-card,
+
+html[data-theme="dark"] body .sponsor-card,
+html[data-theme="dark"] body .sponsor-note,
+html[data-theme="dark"] body .crazy-thursday{
+  background:rgba(53,83,99,.56) !important;
+
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+
+
+/* 夜晚模式内部小卡片 */
+html[data-theme="dark"] body.home-page .profile-list > div,
+html[data-theme="dark"] body.home-page .friend-link-row,
+html[data-theme="dark"] body .filter-tab,
+html[data-theme="dark"] body .tag-cloud a{
+  background:rgba(69,101,116,.45) !important;
+}
+

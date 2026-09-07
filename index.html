@@ -1,63 +1,633 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
   <title>小和山猫虫阁</title>
-  <meta name="description" content="小和山猫虫阁入口">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
-  <script src="assets/i18n.js" defer></script>
-  <script src="assets/entry.js" defer></script>
+  <style>
+    :root{
+      /* 修改背景图片：只改这一行 */
+      --entry-bg: url("assets\\images\\初始背景一.jpg");
+
+      --mouse-x: 50%;
+      --mouse-y: 50%;
+      --overlay-top: rgba(7,13,20,.23);
+      --overlay-bottom: rgba(7,13,20,.50);
+      --white: #fff;
+      --soft-white: rgba(255,255,255,.82);
+    }
+
+    *{box-sizing:border-box}
+    html,body{width:100%;height:100%;margin:0}
+
+    body{
+      overflow:hidden;
+      color:var(--white);
+      background:#10161d;
+      font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",Arial,sans-serif;
+    }
+
+    .entry{
+      position:relative;
+      width:100%;
+      height:100%;
+      min-height:100svh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      isolation:isolate;
+      overflow:hidden;
+      background:
+        linear-gradient(to bottom,var(--overlay-top),var(--overlay-bottom)),
+        var(--entry-bg) center / cover no-repeat;
+    }
+
+    .entry::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      background:radial-gradient(circle at center,transparent 18%,rgba(0,0,0,.08) 62%,rgba(0,0,0,.31) 100%);
+    }
+
+    .entry::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background:
+        radial-gradient(
+          circle 180px at var(--mouse-x) var(--mouse-y),
+          rgba(255,255,255,.15) 0%,
+          rgba(255,255,255,.075) 26%,
+          rgba(255,255,255,.022) 52%,
+          transparent 76%
+        );
+    }
+
+    .corner-brand{
+      position:absolute;
+      left:28px;
+      top:24px;
+      z-index:5;
+      color:rgba(255,255,255,.95);
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:.08em;
+      line-height:1;
+      text-shadow:0 2px 12px rgba(0,0,0,.25);
+      user-select:none;
+    }
+
+    .entry-main{
+      width:min(1180px,90vw);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      transform:translateY(-7vh);
+    }
+
+    .entry-title{
+      margin:0;
+      display:flex;
+      align-items:baseline;
+      justify-content:center;
+      flex-wrap:nowrap;
+      color:#fff;
+      font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC","Heiti SC",Arial,sans-serif;
+      font-size:clamp(54px,8.5vw,124px);
+      line-height:.95;
+      font-weight:900;
+      letter-spacing:.055em;
+      text-shadow:0 4px 28px rgba(0,0,0,.32),0 1px 2px rgba(0,0,0,.28);
+    }
+
+    .entry-title .wave-char{
+      display:inline-block;
+      will-change:transform,filter;
+      animation:titleWave 4.15s ease-in-out infinite alternate,titleFloat 6.8s ease-in-out infinite;
+      animation-delay:calc(var(--i) * 85ms);
+    }
+
+    @keyframes titleWave{
+      0%{
+        transform:
+          translate3d(
+            var(--mouse-dx,0px),
+            calc(var(--mouse-dy,0px) + 0px),
+            0
+          )
+          rotate(calc(var(--mouse-rot,0deg) + 0deg));
+      }
+
+      35%{
+        transform:
+          translate3d(
+            var(--mouse-dx,0px),
+            calc(var(--mouse-dy,0px) - 3.2px),
+            0
+          )
+          rotate(calc(var(--mouse-rot,0deg) - .48deg));
+      }
+
+      70%{
+        transform:
+          translate3d(
+            var(--mouse-dx,0px),
+            calc(var(--mouse-dy,0px) + 2.4px),
+            0
+          )
+          rotate(calc(var(--mouse-rot,0deg) + .38deg));
+      }
+
+      100%{
+        transform:
+          translate3d(
+            var(--mouse-dx,0px),
+            calc(var(--mouse-dy,0px) - 1.3px),
+            0
+          )
+          rotate(calc(var(--mouse-rot,0deg) - .16deg));
+      }
+    }
+
+    @keyframes titleFloat{
+      0%,100%{filter:brightness(1)}
+      50%{filter:brightness(1.055)}
+    }
+
+    .entry-subtitle{
+      margin:18px 0 0;
+      color:rgba(255,255,255,.84);
+      font-family:"STKaiti","Kaiti SC","KaiTi",cursive;
+      font-size:clamp(14px,1.5vw,20px);
+      font-weight:400;
+      letter-spacing:.08em;
+      line-height:1.7;
+      text-shadow:0 2px 14px rgba(0,0,0,.34);
+    }
+
+    .enter-button{
+      margin-top:28px;
+      min-height:38px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 17px;
+      border:1px solid rgba(255,255,255,.58);
+      border-radius:999px;
+      color:#fff;
+      background:rgba(255,255,255,.115);
+      backdrop-filter:blur(12px);
+      font-size:14px;
+      font-weight:750;
+      letter-spacing:.08em;
+      text-decoration:none;
+      box-shadow:0 8px 28px rgba(0,0,0,.12);
+      transition:transform .22s ease,background .22s ease,color .22s ease,border-color .22s ease,box-shadow .22s ease;
+    }
+
+    .enter-button:hover{
+      transform:translateY(-2px);
+      color:#17232e;
+      background:rgba(255,255,255,.92);
+      border-color:rgba(255,255,255,.92);
+      box-shadow:0 10px 34px rgba(0,0,0,.16);
+    }
+
+    .enter-button:active{transform:translateY(0)}
+
+    .quote-area{
+      position:absolute;
+      left:50%;
+      bottom:10.5vh;
+      width:min(980px,86vw);
+      min-height:56px;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      pointer-events:none;
+    }
+
+    .quote{
+      margin:0;
+      color:var(--soft-white);
+      font-family:"STKaiti","Kaiti SC","KaiTi",cursive;
+      font-size:clamp(16px,1.85vw,24px);
+      font-weight:400;
+      letter-spacing:.075em;
+      line-height:1.8;
+      text-shadow:0 2px 16px rgba(0,0,0,.42);
+    }
+
+    .quote::after{
+      content:"";
+      display:inline-block;
+      width:1.5px;
+      height:1.05em;
+      margin-left:6px;
+      vertical-align:-.12em;
+      background:rgba(255,255,255,.78);
+      animation:cursorBlink .85s steps(1,end) infinite;
+    }
+
+    @keyframes cursorBlink{
+      0%,48%{opacity:1}
+      49%,100%{opacity:0}
+    }
+
+    .trail-dot{
+      position:fixed;
+      left:0;
+      top:0;
+      z-index:20;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      pointer-events:none;
+      background:rgba(255,255,255,.72);
+      box-shadow:0 0 8px rgba(255,255,255,.48),0 0 18px rgba(255,255,255,.22);
+      transform:translate(-50%,-50%);
+      opacity:0;
+      animation:trailFade .72s ease-out forwards;
+    }
+
+    @keyframes trailFade{
+      0%{opacity:.72;transform:translate(-50%,-50%) scale(1);filter:blur(0)}
+      55%{opacity:.34}
+      100%{opacity:0;transform:translate(-50%,-50%) scale(.25);filter:blur(1.2px)}
+    }
+
+
+    /* ==============================
+       花瓣飘落效果
+       完全由 CSS 绘制，不需要额外图片
+       ============================== */
+    .petal-layer{
+      position:fixed;
+      inset:0;
+      z-index:8;
+      overflow:hidden;
+      pointer-events:none;
+    }
+
+    .petal{
+      position:absolute;
+      top:-12vh;
+      left:var(--left);
+      width:var(--size);
+      height:calc(var(--size) * 1.42);
+      opacity:var(--opacity);
+      border-radius:72% 28% 68% 32% / 62% 38% 68% 32%;
+      background:
+        radial-gradient(
+          circle at 32% 24%,
+          rgba(255,255,255,.92) 0%,
+          rgba(255,228,235,.82) 25%,
+          rgba(246,174,195,.66) 58%,
+          rgba(224,126,158,.48) 100%
+        );
+      box-shadow:
+        inset 0 0 7px rgba(255,255,255,.28),
+        0 2px 9px rgba(40,20,28,.08);
+
+      transform-origin:55% 44%;
+      will-change:transform,opacity;
+
+      animation:
+        petalFall var(--duration) linear var(--delay) infinite,
+        petalFade var(--duration) ease-in-out var(--delay) infinite;
+    }
+
+    .petal::after{
+      content:"";
+      position:absolute;
+      left:48%;
+      top:14%;
+      width:1px;
+      height:72%;
+      border-radius:999px;
+      background:rgba(185,101,130,.18);
+      transform:rotate(13deg);
+    }
+
+    @keyframes petalFall{
+      0%{
+        transform:
+          translate3d(0,-15vh,0)
+          rotateZ(var(--rotate-start))
+          rotateX(18deg);
+      }
+
+      24%{
+        transform:
+          translate3d(calc(var(--drift) * .28),24vh,0)
+          rotateZ(calc(var(--rotate-start) + 115deg))
+          rotateX(42deg);
+      }
+
+      52%{
+        transform:
+          translate3d(calc(var(--drift) * -.18),55vh,0)
+          rotateZ(calc(var(--rotate-start) + 250deg))
+          rotateX(8deg);
+      }
+
+      78%{
+        transform:
+          translate3d(calc(var(--drift) * .48),86vh,0)
+          rotateZ(calc(var(--rotate-start) + 430deg))
+          rotateX(48deg);
+      }
+
+      100%{
+        transform:
+          translate3d(var(--drift),118vh,0)
+          rotateZ(calc(var(--rotate-start) + 610deg))
+          rotateX(20deg);
+      }
+    }
+
+    @keyframes petalFade{
+      0%,6%{opacity:0}
+      14%{opacity:var(--opacity)}
+      84%{opacity:var(--opacity)}
+      100%{opacity:0}
+    }
+
+    @media(max-width:680px){
+      .corner-brand{left:18px;top:18px;font-size:11px}
+      .entry-main{width:88vw;transform:translateY(-7vh)}
+      .entry-title{font-size:clamp(44px,13vw,72px);letter-spacing:.035em}
+      .entry-subtitle{margin-top:14px;font-size:14px}
+      .enter-button{margin-top:23px;padding:7px 15px;font-size:13px}
+      .quote-area{bottom:9.5vh;width:88vw}
+      .quote{font-size:14px;letter-spacing:.035em;line-height:1.75}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .entry-title .wave-char{animation:none}
+      .quote::after{animation:none}
+      .enter-button{transition:none}
+      .petal{animation:none;display:none}
+    }
+  </style>
 </head>
 
-<body class="entry-page">
-  <main class="entry-screen" id="entry-screen">
-    <div class="entry-photo-background" aria-hidden="true"></div>
-    <div class="entry-tech-grid" aria-hidden="true"></div>
-    <div class="entry-orbit entry-orbit-one" aria-hidden="true"></div>
-    <div class="entry-orbit entry-orbit-two" aria-hidden="true"></div>
-    <div class="entry-pointer-light" aria-hidden="true"></div>
+<body>
+  <div class="petal-layer" id="petal-layer" aria-hidden="true"></div>
 
-    <div class="entry-top-actions">
-      <button class="entry-mini-button" type="button" data-entry-background>
-        图片背景
-      </button>
-      <button class="entry-mini-button" type="button" data-language-toggle>
-        EN
-      </button>
-    </div>
+  <main class="entry" id="entry">
+    <div class="corner-brand">杀手兔的blog</div>
 
-    <div class="entry-data entry-data-a">NODE 47 / ONLINE</div>
-    <div class="entry-data entry-data-b">LOCAL ARCHIVE</div>
-    <div class="entry-data entry-data-c">COORDINATE / XHS</div>
-
-    <section class="entry-panel">
-      <div class="entry-system-line">
-        <span></span>
-        SYSTEM READY
-      </div>
-
-      <p class="entry-kicker">PERSONAL ARCHIVE / DIGITAL GARDEN</p>
-
-      <h1>
-        <span>小和山</span>
-        <span>猫虫阁</span>
-      </h1>
-
-      <p class="entry-copy">
-        喜欢猫猫虫的普遍智慧。
-      </p>
-
-      <a class="entry-button" href="home.html">
-        <span>点击进入小和山猫虫阁</span>
-        <b>↗</b>
-      </a>
-
-      <div class="entry-bars" aria-hidden="true">
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      </div>
+    <section class="entry-main" aria-label="网站入口">
+      <h1 class="entry-title" id="entry-title" data-title="小和山猫虫阁" aria-label="小和山猫虫阁">小和山猫虫阁</h1>
+      <p class="entry-subtitle">喜欢猫猫虫的普遍智慧——猫猫虫长老</p>
+      <a class="enter-button" href="home.html">推门而入</a>
     </section>
+
+    <div class="quote-area" aria-live="polite">
+      <p class="quote" id="quote"></p>
+    </div>
   </main>
+
+  <script>
+    (() => {
+      const title = document.getElementById("entry-title");
+      const quoteEl = document.getElementById("quote");
+
+
+      /* ======================================================
+         花瓣持续飘落
+         修改 PETAL_COUNT 可以调整同时存在的花瓣数量。
+         建议 16～30 之间，数量越大越密。
+         ====================================================== */
+      const petalLayer = document.getElementById("petal-layer");
+      const PETAL_COUNT = 22;
+
+      if(
+        petalLayer &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ){
+        for(let i = 0; i < PETAL_COUNT; i += 1){
+          const petal = document.createElement("span");
+          petal.className = "petal";
+
+          const size = 7 + Math.random() * 10;
+          const left = Math.random() * 100;
+          const duration = 8.5 + Math.random() * 8;
+          const delay = -(Math.random() * duration);
+          const opacity = .30 + Math.random() * .42;
+          const drift = -90 + Math.random() * 180;
+          const rotateStart = Math.floor(Math.random() * 360);
+
+          petal.style.setProperty("--size", size + "px");
+          petal.style.setProperty("--left", left + "vw");
+          petal.style.setProperty("--duration", duration + "s");
+          petal.style.setProperty("--delay", delay + "s");
+          petal.style.setProperty("--opacity", opacity.toFixed(2));
+          petal.style.setProperty("--drift", drift + "px");
+          petal.style.setProperty("--rotate-start", rotateStart + "deg");
+
+          petalLayer.appendChild(petal);
+        }
+      }
+
+      const titleText = title.dataset.title || title.textContent.trim();
+      title.textContent = "";
+      [...titleText].forEach((char,index) => {
+        const span = document.createElement("span");
+        span.className = "wave-char";
+        span.style.setProperty("--i", index);
+        span.textContent = char;
+        title.appendChild(span);
+      });
+
+      /* ======================================================
+         标题对鼠标的轻微扰动
+         鼠标靠近时，每个字会产生很小的位移与倾斜；
+         离开后用缓动方式回到原位。
+         ====================================================== */
+      const titleChars = [...title.querySelectorAll(".wave-char")];
+
+      const mouseState = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+        active: false
+      };
+
+      const charMotion = titleChars.map(() => ({
+        dx: 0,
+        dy: 0,
+        rot: 0,
+        targetDx: 0,
+        targetDy: 0,
+        targetRot: 0
+      }));
+
+      function updateTitleTargets(){
+        titleChars.forEach((char,index) => {
+          const rect = char.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+
+          const dx = cx - mouseState.x;
+          const dy = cy - mouseState.y;
+          const distance = Math.hypot(dx,dy);
+
+          /*
+           * 260px 内逐渐产生影响。
+           * 最大位移约 2.6px，旋转约 0.5deg，
+           * 故意保持很轻，不会盖过原本的波动动画。
+           */
+          const radius = 260;
+          const strength = mouseState.active
+            ? Math.max(0, 1 - distance / radius)
+            : 0;
+
+          if(strength > 0 && distance > 0.1){
+            const nx = dx / distance;
+            const ny = dy / distance;
+
+            charMotion[index].targetDx = nx * strength * 2.6;
+            charMotion[index].targetDy = ny * strength * 1.9;
+            charMotion[index].targetRot = nx * strength * .50;
+          }else{
+            charMotion[index].targetDx = 0;
+            charMotion[index].targetDy = 0;
+            charMotion[index].targetRot = 0;
+          }
+        });
+      }
+
+      function animateTitleDisturbance(){
+        updateTitleTargets();
+
+        titleChars.forEach((char,index) => {
+          const motion = charMotion[index];
+
+          // 缓慢跟随，避免鼠标移动时出现突兀抖动。
+          motion.dx += (motion.targetDx - motion.dx) * .10;
+          motion.dy += (motion.targetDy - motion.dy) * .10;
+          motion.rot += (motion.targetRot - motion.rot) * .10;
+
+          char.style.setProperty("--mouse-dx", motion.dx.toFixed(3) + "px");
+          char.style.setProperty("--mouse-dy", motion.dy.toFixed(3) + "px");
+          char.style.setProperty("--mouse-rot", motion.rot.toFixed(3) + "deg");
+        });
+
+        requestAnimationFrame(animateTitleDisturbance);
+      }
+
+      window.addEventListener("pointermove", (event) => {
+        if(event.pointerType === "touch") return;
+        mouseState.x = event.clientX;
+        mouseState.y = event.clientY;
+        mouseState.active = true;
+      });
+
+      document.documentElement.addEventListener("mouseleave", () => {
+        mouseState.active = false;
+      });
+
+      animateTitleDisturbance();
+
+      let lastTrailTime = 0;
+      let lastX = -999;
+      let lastY = -999;
+
+      window.addEventListener("pointermove", (event) => {
+        const xPercent = (event.clientX / window.innerWidth) * 100;
+        const yPercent = (event.clientY / window.innerHeight) * 100;
+        document.documentElement.style.setProperty("--mouse-x", xPercent + "%");
+        document.documentElement.style.setProperty("--mouse-y", yPercent + "%");
+
+        if(event.pointerType === "touch" || window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+          return;
+        }
+
+        const now = performance.now();
+        const distance = Math.hypot(event.clientX-lastX,event.clientY-lastY);
+        if(now-lastTrailTime < 24 || distance < 5) return;
+
+        lastTrailTime = now;
+        lastX = event.clientX;
+        lastY = event.clientY;
+
+        const dot = document.createElement("span");
+        dot.className = "trail-dot";
+        dot.style.left = event.clientX + "px";
+        dot.style.top = event.clientY + "px";
+
+        const size = 4 + Math.random() * 4;
+        dot.style.width = size + "px";
+        dot.style.height = size + "px";
+
+        document.body.appendChild(dot);
+        window.setTimeout(() => dot.remove(), 760);
+      });
+
+      const quotes = [
+        "峻似吕梁千仞，壮似钱塘八月，直下洗尘寰。",
+        "最爱湖东行不足，绿杨阴里白沙堤",
+        "我家洗砚池头树，朵朵花开淡墨痕",
+        "提兵百万西湖上，立马吴山第一峰"
+      ];
+
+      const storageKey = "xiaoheshan-entry-quote-index";
+      let currentIndex = 0;
+
+      try{
+        const previous = Number(localStorage.getItem(storageKey));
+        if(Number.isInteger(previous) && previous >= 0){
+          currentIndex = (previous + 1) % quotes.length;
+        }
+        localStorage.setItem(storageKey,String(currentIndex));
+      }catch(error){
+        currentIndex = Math.floor(Math.random() * quotes.length);
+      }
+
+      const sentence = quotes[currentIndex];
+      const TYPE_SPEED = 115;
+      const ERASE_SPEED = 75;
+      const HOLD_TIME = 1800;
+      const EMPTY_TIME = 650;
+      let charIndex = 0;
+
+      function typeNext(){
+        if(charIndex < sentence.length){
+          charIndex += 1;
+          quoteEl.textContent = sentence.slice(0,charIndex);
+          window.setTimeout(typeNext,TYPE_SPEED);
+          return;
+        }
+        window.setTimeout(eraseNext,HOLD_TIME);
+      }
+
+      function eraseNext(){
+        if(charIndex > 0){
+          charIndex -= 1;
+          quoteEl.textContent = sentence.slice(0,charIndex);
+          window.setTimeout(eraseNext,ERASE_SPEED);
+          return;
+        }
+        window.setTimeout(typeNext,EMPTY_TIME);
+      }
+
+      if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+        quoteEl.textContent = sentence;
+      }else{
+        typeNext();
+      }
+    })();
+  </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"45c2bf8136a245cd97f1c2e9a96c0730","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
