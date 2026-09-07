@@ -7922,3 +7922,21 @@ html[data-theme="dark"] body .tag-cloud a{
   background:rgba(69,101,116,.45) !important;
 }
 
+.article-image{
+  margin:32px 0;
+}
+
+.article-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:18px;
+  object-fit:cover;
+}
+
+.article-image figcaption{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:center;
+}
