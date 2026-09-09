@@ -7,6 +7,8 @@
   <meta name="description" content="个人博客静态预览">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/posts-data.js" defer></script>
+  <script src="assets/posts.js" defer></script>
   <script src="assets/glow.js" defer></script>
   <script src="assets/sparks.js" defer></script>
   <script src="assets/effects.js" defer></script>
@@ -39,14 +41,7 @@
   <p class="eyebrow">TAGS / INDEX</p>
   <h1>Explore by topic.</h1>
 </section>
-<section class="tags-index section"><a class="filter-tab" href="tags/astro.html"><span>#Astro</span><small>1 post</small></a>
-          <a class="filter-tab" href="tags/blog.html"><span>#Blog</span><small>1 post</small></a>
-          <a class="filter-tab" href="tags/css.html"><span>#食物😋</span><small>1 post</small></a>
-          <a class="filter-tab" href="tags/design.html"><span>#Design</span><small>1 post</small></a>
-          <a class="filter-tab" href="tags/github.html"><span>#GitHub</span><small>1 post</small></a>
-          <a class="filter-tab" href="tags/notes.html"><span>#Notes</span><small>1 post</small></a>
-          <a class="filter-tab" href="tags/web.html"><span>#Web</span><small>1 post</small></a>
-          <a class="filter-tab" href="tags/tag.html"><span>#随笔</span><small>1 post</small></a></section>
+<section class="tags-index section" data-tag-index data-root="."></section>
 </main>
 
 <footer class="site-footer simple-footer">

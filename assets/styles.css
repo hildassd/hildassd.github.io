@@ -7958,3 +7958,61 @@ html[data-theme="dark"] body .tag-cloud a{
   font-size:12px;
   text-align:center;
 }
+
+/* Keep every static page painted to the viewport edge and the footer at the bottom. */
+html{
+  min-height:100%;
+}
+
+body:not(.entry-page){
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+}
+
+body:not(.entry-page)>main{
+  width:100%;
+  flex:1 0 auto;
+}
+
+body:not(.entry-page)>.site-footer{
+  flex:0 0 auto;
+  margin-bottom:0 !important;
+}
+
+.filter-tab.active,
+.filter-tab[aria-current="page"]{
+  color:var(--text) !important;
+  border-color:var(--line-strong) !important;
+  font-weight:800;
+}
+
+.empty-posts{
+  margin:0;
+  padding:48px 24px;
+  color:var(--muted);
+  text-align:center;
+}
+
+.post-tag{
+  position:relative;
+  z-index:2;
+  cursor:pointer;
+}
+
+.post-hitarea{
+  position:relative;
+}
+
+.post-title-link::after{
+  content:"";
+  position:absolute;
+  inset:0;
+}
+
+.post-tag:focus-visible,
+.post-title-link:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+}
