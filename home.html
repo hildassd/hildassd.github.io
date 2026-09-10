@@ -10,6 +10,14 @@
   <script src="assets/posts-data.js" defer></script>
   <script src="assets/posts.js" defer></script>
   <script>
+    // Set this to a public JSON endpoint produced by your serverless function or GitHub Action.
+    window.SITE_STATS_CONFIG = {
+      endpoint: "https://shanmao-home-stats.ssd439978.workers.dev/stats",
+      timezone: "Asia/Shanghai"
+    };
+  </script>
+  <script src="assets/site-stats.js" defer></script>
+  <script>
     (() => {
       const isLocalPreview =
         location.protocol === "file:" ||
@@ -67,6 +75,25 @@
     <p class="hero-reference-lead">
       继承于莫干山猫虫阁的数字空间，分享我的想法和思考
     </p>
+
+    <div class="hero-stats" aria-label="网站统计">
+      <div class="hero-stat">
+        <span>访客数</span>
+        <strong data-site-stat="visitors">—</strong>
+      </div>
+      <div class="hero-stat">
+        <span>总浏览量</span>
+        <strong data-site-stat="pageviews">—</strong>
+      </div>
+      <div class="hero-stat">
+        <span>上次更新时间</span>
+        <strong data-site-stat="updated-at">—</strong>
+      </div>
+      <div class="hero-stat">
+        <span>博客文章总数</span>
+        <strong data-site-stat="posts">—</strong>
+      </div>
+    </div>
 
     <p class="hero-reference-code">
       keep learning, keep building, keep thinking.

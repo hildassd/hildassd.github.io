@@ -1,4 +1,12 @@
 window.BLOG_POSTS = Object.freeze([
+    {
+    path: "articles/20260909ROS2.html",
+    date: "2026-09-09",
+    displayDate: "2026 / 09 / 09",
+    title: "对ROS2基础知识的简要理解",
+    description: "尽量通俗易懂",
+    tags: ["笔记", "ros2"]
+  },
   {
     path: "articles/20260908辗转求学便两年.html",
     date: "2026-09-08",

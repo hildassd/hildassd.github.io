@@ -8016,3 +8016,53 @@ body:not(.entry-page)>.site-footer{
   outline:2px solid var(--accent);
   outline-offset:3px;
 }
+
+/* Compact 2×2 statistics under the homepage hero description. */
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px 22px;
+  max-width:620px;
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid color-mix(in srgb,currentColor 16%,transparent);
+}
+
+.hero-stat{
+  min-width:0;
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.hero-stat span{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+
+.hero-stat strong{
+  color:var(--text);
+  font-size:14px;
+  font-variant-numeric:tabular-nums;
+  text-align:right;
+  white-space:nowrap;
+}
+
+@media(max-width:680px){
+  .hero-stats{
+    gap:10px 14px;
+  }
+
+  .hero-stat{
+    display:block;
+  }
+
+  .hero-stat strong{
+    display:block;
+    margin-top:3px;
+    text-align:left;
+  }
+}

@@ -1,0 +1,1362 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>对ROS2基础知识的简要理解 · 杀手兔</title>
+  <meta name="description" content="尽量通俗易懂">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <script src="../assets/glow.js" defer></script>
+  <script src="../assets/sparks.js" defer></script>
+  <script src="../assets/effects.js" defer></script>
+  <script src="../assets/i18n.js" defer></script>
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="../home.html">
+      <span class="brand-mark">IE.</span>
+      <span class="brand-name">杀手兔</span>
+    </a>
+    <div class="header-actions">
+      <nav class="nav" aria-label="主要导航"><a class="nav-link" href="../home.html">首页</a>
+<a class="nav-link active" href="../blog.html">文章</a>
+<a class="nav-link" href="../projects.html">项目</a>
+<a class="nav-link" href="../now.html">此刻</a>
+          <a class="nav-link" href="../sponsor.html">赞助</a>
+          <a class="nav-link" href="../about.html">关于</a></nav>
+      <button class="language-toggle" type="button" aria-label="Switch to English" data-language-toggle>EN</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="切换到夜晚模式">☾</button>
+    </div>
+  </div>
+</header>
+
+  <main>
+<article class="article">
+  <a class="back-link" href="../blog.html">← Back to Writing</a>
+  <header class="article-header">
+    <div class="article-meta"><time>2026 / 09 / 09</time></div>
+    <h1>对ROS2基础知识的简要理解</h1>
+    <p class="article-description">尽量通俗易懂</p>
+    <div class="article-tags"><a href="../blog.html?tag=%E9%9A%8F%E7%AC%94">#笔记#ros2</a></div>
+  </header>
+
+  <div class="prose">
+    <!-- <h1>引言</h1>
+    <h1>基本概念</h1>
+    <h2>工作空间</h2>
+    <p>工作空间就是存放 ROS2 工程代码的目录结构，通常包含 src（源码和功能包在这里）、build（编译中间文件）、install（安装结果）、log（日志）。在 Ubuntu 中创建 ROS2 工作空间的标准步骤如下：</p>
+    <h3>创建工作空间目录</h3>
+    <p>打开终端，执行：</p>
+    <pre><code>
+    mkdir -p ~/my_ws/src
+    cd ~/my_ws
+    </code></pre>
+    <p>其中my_ws是根目录，可以自定义名称</p>
+
+        <h3>编译工作空间</h3>
+    <p>使用colcon build编译：</p>
+    <pre><code>
+    $ sudo apt install python3-colcon-ros
+    $ cd ~/dev_ws/
+    $ colcon build
+    </code></pre>
+    <p>编译完成后，工作空间下会新增 build/、install/、log/ 目录</p>
+
+        <h3>激活工作空间</h3>
+    <p>终端输入，并且把这段代码添加到 ~/.bashrc 中，避免每次手动执行</p>
+    <pre><code>
+    source ~/my_ws/install/setup.bash
+    </code></pre>
+
+    <h2>节点</h2>
+    <p>实际项目中，节点可以理解为采集图像的摄像头、规划路径的导航等。实现一个节点的流程为：编程接口初始化,创建节点并初始化,实现节点功能,销毁节点并关闭接口</p>
+    <p>创建并初始化节点：</p>
+    <pre><code>
+        super().__init__('my_node_name')
+    </code></pre>
+    <h2>话题</h2>
+    <h2>服务</h2>
+    <h2>动作</h2>
+    <h2>参数</h2>
+    <h2>通信接口</h2>
+    <h2>分布式通信</h2>
+    <h2>DDS</h2>
+
+    <h1>常用工具</h1>
+    <h2>Launch</h2>
+    <h2>TF</h2>
+    <h2>URDF</h2>
+    <h2>gazebo</h2>
+    <h2>Rviz</h2>
+    <h2>rqt</h2> -->
+
+
+<h1>ROS 2 核心概念与基础知识</h1>
+
+<h2>工作空间 Workspace</h2>
+
+<p>
+工作空间是 ROS 2 项目的顶层开发目录，用于统一存放、编译和管理多个功能包。
+</p>
+
+<p>
+典型目录结构如下：
+</p>
+
+<pre>
+ros2_ws/
+├── src/
+├── build/
+├── install/
+└── log/
+</pre>
+
+<p>
+src 用于存放功能包源码。
+build 用于保存编译过程中的中间文件。
+install 用于保存编译后的可执行程序、库和资源。
+log 用于保存编译日志。
+</p>
+
+<p>
+工作空间通常使用 colcon 进行统一编译：
+</p>
+
+<pre>
+cd ~/ros2_ws
+colcon build
+</pre>
+
+<p>
+编译完成后需要加载当前工作空间环境：
+</p>
+
+<pre>
+source install/setup.bash
+</pre>
+
+<p>
+该命令的作用是将当前工作空间中的功能包、可执行程序、库和资源加入当前终端的 ROS 2 环境，使 ros2 run、ros2 launch 等命令能够找到刚编译的内容。
+</p>
+
+<p>
+实际项目中，一个机器人通常使用一个主要工作空间，在 src 中放置驱动、导航、描述、接口、启动等多个功能包。
+</p>
+
+
+<h2>功能包 Package</h2>
+
+<p>
+功能包是 ROS 2 中组织代码和资源的基本单位。
+</p>
+
+<p>
+不同功能通常拆分到不同功能包中，例如：
+</p>
+
+<pre>
+robot_driver
+robot_navigation
+robot_description
+robot_interfaces
+robot_bringup
+robot_simulation
+</pre>
+
+<p>
+一个功能包可以包含一个节点、多个节点，也可以完全不包含节点。
+</p>
+
+<p>
+例如 robot_description 功能包通常主要保存 URDF、Xacro、Mesh 和 RViz 配置，不一定包含可执行节点。
+</p>
+
+<p>
+功能包中的 package.xml 用于描述功能包名称、版本、维护者以及依赖关系。
+</p>
+
+<pre>
+&lt;depend&gt;rclcpp&lt;/depend&gt;
+&lt;depend&gt;geometry_msgs&lt;/depend&gt;
+</pre>
+
+<p>
+上述内容表示当前功能包依赖 rclcpp 和 geometry_msgs。
+</p>
+
+<p>
+C++ 功能包通常还包含 CMakeLists.txt，用于描述编译规则。
+Python 功能包通常通过 setup.py 或 pyproject 等方式描述安装和入口信息。
+</p>
+
+
+<h2>节点 Node</h2>
+
+<p>
+节点是 ROS 2 中执行具体功能的运行单元。
+</p>
+
+<p>
+一个节点通常负责一个相对明确的功能，例如：
+</p>
+
+<pre>
+lidar_node
+camera_node
+base_node
+localization_node
+planner_node
+controller_node
+</pre>
+
+<p>
+节点可以创建 Publisher、Subscriber、Service、Client、Action Server、Action Client 和 Parameter。
+</p>
+
+<p>
+节点是 ROS 2 通信图中的基本参与者。
+</p>
+
+<p>
+常用查看命令：
+</p>
+
+<pre>
+ros2 node list
+</pre>
+
+<p>
+用于查看当前 ROS 2 系统中存在的节点。
+</p>
+
+<pre>
+ros2 node info /node_name
+</pre>
+
+<p>
+用于查看某个节点发布的话题、订阅的话题、提供的服务以及使用的动作接口。
+</p>
+
+<p>
+阅读节点源码时，应优先关注节点的输入、输出和配置，而不是立即分析内部所有算法代码。
+</p>
+
+
+<h2>话题 Topic</h2>
+
+<p>
+Topic 是 ROS 2 中基于发布订阅模型的异步通信机制。
+</p>
+
+<p>
+Publisher 向某个 Topic 发布消息，Subscriber 订阅该 Topic 并接收消息。
+</p>
+
+<pre>
+Publisher
+    │
+    ↓
+  Topic
+    │
+    ├── Subscriber
+    ├── Subscriber
+    └── Subscriber
+</pre>
+
+<p>
+Publisher 和 Subscriber 不需要直接知道彼此的信息，只需要保证 Topic 名称、消息类型和 QoS 能够匹配。
+</p>
+
+<p>
+Topic 主要用于持续产生的数据，例如：
+</p>
+
+<pre>
+/scan
+/camera/image_raw
+/odom
+/cmd_vel
+/imu/data
+</pre>
+
+<p>
+典型使用场景包括激光雷达、摄像头、IMU、里程计、速度控制、机器人状态等。
+</p>
+
+<p>
+创建 Publisher 时应重点关注三个信息：
+消息类型、Topic 名称和 QoS。
+</p>
+
+<p>
+创建 Subscriber 时应重点关注：
+订阅的话题、消息类型以及收到消息后执行的回调函数。
+</p>
+
+<p>
+Topic 是异步通信机制，发布者通常不会等待订阅者返回结果。
+</p>
+
+<p>
+常用命令：
+</p>
+
+<pre>
+ros2 topic list
+ros2 topic info /scan
+ros2 topic echo /scan
+ros2 topic hz /scan
+</pre>
+
+<p>
+ros2 topic list 用于查看话题列表。
+ros2 topic info 用于查看话题类型和发布订阅关系。
+ros2 topic echo 用于查看实时消息内容。
+ros2 topic hz 用于查看消息发布频率。
+</p>
+
+
+<h2>服务 Service</h2>
+
+<p>
+Service 是 ROS 2 中基于请求和响应模型的通信机制。
+</p>
+
+<pre>
+Client
+   │
+   │ Request
+   ↓
+Server
+   │
+   │ Response
+   ↓
+Client
+</pre>
+
+<p>
+Client 发送请求，Server 处理请求并返回结果。
+</p>
+
+<p>
+Service 适合一次性、短时间完成、需要明确返回结果的操作。
+</p>
+
+<p>
+典型场景包括：
+重置设备、保存地图、切换模式、获取一次状态、打开或关闭某项功能。
+</p>
+
+<p>
+例如：
+</p>
+
+<pre>
+/reset_odometry
+/save_map
+/set_mode
+</pre>
+
+<p>
+如果任务执行时间较长，并且需要进度反馈或取消能力，通常不应使用普通 Service，而应使用 Action。
+</p>
+
+<p>
+常用命令：
+</p>
+
+<pre>
+ros2 service list
+ros2 service type /service_name
+ros2 service call /service_name interface_type "{}"
+</pre>
+
+
+<h2>动作 Action</h2>
+
+<p>
+Action 用于执行需要一定时间完成的任务。
+</p>
+
+<p>
+Action 主要包含 Goal、Feedback 和 Result 三部分。
+</p>
+
+<pre>
+Goal
+---
+Result
+---
+Feedback
+</pre>
+
+<p>
+Goal 表示任务目标。
+Feedback 表示任务执行过程中的状态反馈。
+Result 表示任务最终执行结果。
+</p>
+
+<p>
+Action 通常还支持取消任务。
+</p>
+
+<p>
+典型使用场景包括：
+机器人导航、机械臂轨迹执行、自动泊车、长时间运动任务。
+</p>
+
+<p>
+例如导航任务中：
+</p>
+
+<pre>
+Goal:
+目标位置
+
+Feedback:
+当前位置
+剩余距离
+任务状态
+
+Result:
+成功
+失败
+取消
+</pre>
+
+<p>
+Nav2 中的 NavigateToPose 就是典型 Action。
+</p>
+
+<p>
+常用命令：
+</p>
+
+<pre>
+ros2 action list
+ros2 action info /action_name
+</pre>
+
+
+<h2>参数 Parameter</h2>
+
+<p>
+Parameter 用于保存节点运行时的配置数据。
+</p>
+
+<p>
+参数属于具体节点，不是整个 ROS 2 系统共享的全局变量。
+</p>
+
+<p>
+常见参数包括：
+</p>
+
+<pre>
+max_speed
+controller_frequency
+frame_id
+sensor_range
+use_sim_time
+</pre>
+
+<p>
+参数可以避免将大量配置写死在代码中。
+</p>
+
+<p>
+同一套程序可以通过不同参数适配不同机器人、不同硬件和不同运行环境。
+</p>
+
+<p>
+常见 YAML 参数文件：
+</p>
+
+<pre>
+controller:
+  ros__parameters:
+    max_speed: 0.5
+    frequency: 20.0
+</pre>
+
+<p>
+ros__parameters 下的内容表示该节点的参数。
+</p>
+
+<p>
+常用命令：
+</p>
+
+<pre>
+ros2 param list
+ros2 param get /controller max_speed
+ros2 param set /controller max_speed 0.8
+</pre>
+
+<p>
+在支持动态参数修改的节点中，可以在运行过程中调整参数而不修改源码。
+</p>
+
+
+<h2>通信接口 Interface</h2>
+
+<p>
+通信接口用于定义 ROS 2 节点之间交换的数据结构。
+</p>
+
+<p>
+主要包括 Message、Service 和 Action 三种接口。
+</p>
+
+<h3>Message</h3>
+
+<p>
+Message 使用 .msg 定义，主要用于 Topic。
+</p>
+
+<p>
+例如机器人速度控制常使用：
+</p>
+
+<pre>
+geometry_msgs/msg/Twist
+</pre>
+
+<p>
+其中包含线速度 linear 和角速度 angular。
+</p>
+
+<h3>Service Interface</h3>
+
+<p>
+Service 使用 .srv 定义。
+</p>
+
+<p>
+结构分为 Request 和 Response：
+</p>
+
+<pre>
+请求字段
+---
+返回字段
+</pre>
+
+<h3>Action Interface</h3>
+
+<p>
+Action 使用 .action 定义。
+</p>
+
+<p>
+结构分为 Goal、Result 和 Feedback：
+</p>
+
+<pre>
+Goal
+---
+Result
+---
+Feedback
+</pre>
+
+<p>
+查看接口结构可以使用：
+</p>
+
+<pre>
+ros2 interface show geometry_msgs/msg/Twist
+</pre>
+
+<p>
+阅读陌生项目时，可以先通过 Topic 类型找到 Interface，再根据 Interface 判断数据中包含哪些字段。
+</p>
+
+
+<h2>分布式通信</h2>
+
+<p>
+ROS 2 支持节点运行在不同计算机上。
+</p>
+
+<p>
+只要网络配置和 ROS 2 通信配置正确，不同主机上的节点可以自动发现并进行 Topic、Service 和 Action 通信。
+</p>
+
+<p>
+例如：
+</p>
+
+<pre>
+机器人主机
+├── lidar_node
+├── camera_node
+└── base_node
+
+开发电脑
+├── RViz
+├── localization_node
+└── debugging tools
+</pre>
+
+<p>
+机器人主机发布的 /scan 可以被开发电脑上的 RViz 或定位节点订阅。
+</p>
+
+<p>
+ROS 2 的分布式通信通常不要求应用节点直接配置对方 IP 地址。
+</p>
+
+<p>
+节点发现和底层通信主要由 DDS 等机制完成。
+</p>
+
+<p>
+ROS_DOMAIN_ID 用于划分不同 ROS 2 通信域。
+</p>
+
+<pre>
+export ROS_DOMAIN_ID=10
+</pre>
+
+<p>
+不同 ROS_DOMAIN_ID 的系统通常不会自动互相发现。
+</p>
+
+<p>
+在实验室、多机器人和多人开发环境中，经常使用 ROS_DOMAIN_ID 隔离不同 ROS 2 系统。
+</p>
+
+
+<h2>DDS</h2>
+
+<p>
+DDS 全称 Data Distribution Service，是 ROS 2 底层通信的重要基础。
+</p>
+
+<p>
+DDS 主要负责节点发现、数据分发、网络传输和 QoS 等能力。
+</p>
+
+<p>
+ROS 2 通信结构可以简化为：
+</p>
+
+<pre>
+Node
+ ↓
+rclcpp / rclpy
+ ↓
+ROS 2 Client Library
+ ↓
+RMW
+ ↓
+DDS
+ ↓
+Network
+</pre>
+
+<p>
+应用开发通常不需要直接使用 DDS API，而是通过 ROS 2 提供的 Publisher、Subscriber、Service 和 Action 接口使用底层通信能力。
+</p>
+
+<h3>QoS</h3>
+
+<p>
+QoS 用于定义 ROS 2 数据传输策略。
+</p>
+
+<p>
+常见 QoS 配置包括 Reliability、History、Depth 和 Durability。
+</p>
+
+<h3>Reliability</h3>
+
+<p>
+Reliable 表示尽可能保证消息成功到达。
+</p>
+
+<p>
+Best Effort 表示尽力传输，允许消息丢失。
+</p>
+
+<p>
+高频传感器数据经常使用 Best Effort，因为旧数据价值较低，新数据会持续到达。
+</p>
+
+<h3>Depth</h3>
+
+<p>
+Depth 表示消息队列能够保存的消息数量。
+</p>
+
+<p>
+例如：
+</p>
+
+<pre>
+depth = 10
+</pre>
+
+<p>
+表示最多缓存一定数量的未处理消息，避免消息无限积压。
+</p>
+
+<h3>Durability</h3>
+
+<p>
+Volatile 表示新加入的 Subscriber 只接收之后发布的数据。
+</p>
+
+<p>
+Transient Local 可以让新加入的 Subscriber 获取 Publisher 保存的部分历史数据。
+</p>
+
+<p>
+如果 Topic 已经存在，但是 Subscriber 无法收到数据，应检查 Topic 名称、消息类型和 QoS 是否兼容。
+</p>
+
+
+<h2>Launch</h2>
+
+<p>
+Launch 用于统一启动和配置多个 ROS 2 节点。
+</p>
+
+<p>
+一个 Launch 文件可以负责：
+</p>
+
+<p>
+启动节点、设置节点名称、设置 Namespace、加载参数文件、进行 Topic Remapping、启动其他 Launch 文件以及设置环境参数。
+</p>
+
+<p>
+典型启动方式：
+</p>
+
+<pre>
+ros2 launch robot_bringup robot.launch.py
+</pre>
+
+<p>
+阅读 Launch 文件中的 Node 配置时，应重点关注：
+</p>
+
+<pre>
+package
+executable
+name
+namespace
+parameters
+remappings
+</pre>
+
+<p>
+package 表示功能包。
+executable 表示需要启动的程序。
+name 表示节点运行时名称。
+parameters 表示需要加载的参数。
+remappings 表示接口名称映射。
+</p>
+
+<p>
+例如 Remapping 可以将节点默认使用的：
+</p>
+
+<pre>
+/cmd_vel
+</pre>
+
+<p>
+映射成：
+</p>
+
+<pre>
+/robot1/cmd_vel
+</pre>
+
+<p>
+这样可以在不修改节点源码的情况下修改通信连接关系。
+</p>
+
+
+<h2>TF</h2>
+
+<p>
+TF 用于管理 ROS 2 系统中不同坐标系之间的位置和姿态变换。
+</p>
+
+<p>
+机器人系统中的传感器、底盘、地图和机械结构通常拥有不同坐标系。
+</p>
+
+<p>
+典型移动机器人 TF 结构：
+</p>
+
+<pre>
+map
+ ↓
+odom
+ ↓
+base_link
+ ├── laser_link
+ ├── camera_link
+ └── imu_link
+</pre>
+
+<h3>base_link</h3>
+
+<p>
+base_link 通常表示机器人主体的基准坐标系。
+</p>
+
+<h3>odom</h3>
+
+<p>
+odom 表示里程计坐标系。
+</p>
+
+<p>
+odom 通常具有运动连续、短时间平滑的特点，但会随着时间产生累计漂移。
+</p>
+
+<h3>map</h3>
+
+<p>
+map 表示全局地图坐标系。
+</p>
+
+<p>
+定位或 SLAM 系统通常负责计算 map 和 odom 之间的关系，用于修正长期定位误差。
+</p>
+
+<p>
+移动机器人中常见关系：
+</p>
+
+<pre>
+map → odom → base_link
+</pre>
+
+<p>
+TF 分为动态 TF 和静态 TF。
+</p>
+
+<p>
+例如 odom 到 base_link 会随着机器人运动持续变化，属于动态 TF。
+</p>
+
+<p>
+base_link 到 laser_link 由传感器固定安装位置决定，通常属于静态 TF。
+</p>
+
+<p>
+常见 TF Topic：
+</p>
+
+<pre>
+/tf
+/tf_static
+</pre>
+
+<p>
+调试两个坐标系之间的变换：
+</p>
+
+<pre>
+ros2 run tf2_ros tf2_echo map base_link
+</pre>
+
+<p>
+涉及位置、姿态、点云、导航目标等数据时，应同时确认数据所属的 frame。
+</p>
+
+
+<h2>URDF</h2>
+
+<p>
+URDF 全称 Unified Robot Description Format，用于描述机器人机械结构。
+</p>
+
+<p>
+URDF 可以描述：
+机器人包含哪些部件、部件尺寸、部件之间的连接关系、关节类型、碰撞模型、视觉模型、质量和惯性等信息。
+</p>
+
+<p>
+URDF 最核心的两个概念是 Link 和 Joint。
+</p>
+
+<h3>Link</h3>
+
+<p>
+Link 表示机器人中的刚性部件。
+</p>
+
+<p>
+例如：
+</p>
+
+<pre>
+base_link
+left_wheel_link
+right_wheel_link
+laser_link
+camera_link
+arm_link
+</pre>
+
+<h3>Joint</h3>
+
+<p>
+Joint 表示两个 Link 之间的连接关系。
+</p>
+
+<p>
+常见 Joint 类型包括固定关节、旋转关节和直线移动关节。
+</p>
+
+<p>
+例如：
+</p>
+
+<pre>
+base_link
+    │
+ fixed joint
+    │
+laser_link
+</pre>
+
+<p>
+表示激光雷达固定安装在机器人主体上。
+</p>
+
+<p>
+URDF 通常和 robot_state_publisher 配合使用：
+</p>
+
+<pre>
+URDF
+ ↓
+robot_state_publisher
+ ↓
+TF
+</pre>
+
+<p>
+robot_state_publisher 根据 URDF 中的机器人结构和关节状态发布对应 TF。
+</p>
+
+<p>
+实际项目通常使用 Xacro 编写机器人描述。
+</p>
+
+<p>
+Xacro 支持变量、宏、条件和文件复用，可以降低复杂 URDF 的维护成本。
+</p>
+
+
+<h2>Gazebo</h2>
+
+<p>
+Gazebo 是机器人仿真环境，用于模拟机器人、传感器和物理世界。
+</p>
+
+<p>
+Gazebo 可以模拟：
+重力、碰撞、摩擦、关节运动、机器人底盘、摄像头、激光雷达、IMU 等。
+</p>
+
+<p>
+仿真机器人可以通过 ROS 2 接口发布和接收数据。
+</p>
+
+<p>
+例如虚拟激光雷达可以发布：
+</p>
+
+<pre>
+/scan
+</pre>
+
+<p>
+导航节点可以发布：
+</p>
+
+<pre>
+/cmd_vel
+</pre>
+
+<p>
+仿真底盘接收 /cmd_vel 后根据物理模型运动。
+</p>
+
+<p>
+如果仿真系统和真实机器人使用相同的 Topic 名称和消息类型，上层算法通常可以在真实环境和仿真环境之间复用。
+</p>
+
+<h3>仿真时间</h3>
+
+<p>
+Gazebo 可以暂停、加速和减速，因此仿真环境通常使用模拟时间。
+</p>
+
+<p>
+Gazebo 可以发布：
+</p>
+
+<pre>
+/clock
+</pre>
+
+<p>
+ROS 2 节点设置：
+</p>
+
+<pre>
+use_sim_time = true
+</pre>
+
+<p>
+之后节点将使用仿真时间，而不是计算机系统时间。
+</p>
+
+
+<h2>RViz</h2>
+
+<p>
+RViz 是 ROS 2 的数据可视化工具。
+</p>
+
+<p>
+RViz 不负责物理仿真，主要负责显示 ROS 2 系统中的数据。
+</p>
+
+<p>
+常见可视化内容包括：
+</p>
+
+<pre>
+LaserScan
+PointCloud2
+Image
+Map
+Path
+Odometry
+TF
+RobotModel
+Marker
+</pre>
+
+<p>
+在 SLAM 和导航项目中，RViz 常用于显示地图、机器人位置、激光雷达、全局路径、局部路径和导航目标。
+</p>
+
+<h3>Fixed Frame</h3>
+
+<p>
+Fixed Frame 是 RViz 中非常重要的配置。
+</p>
+
+<p>
+它表示所有数据显示时使用的全局参考坐标系。
+</p>
+
+<p>
+导航项目中通常设置为：
+</p>
+
+<pre>
+map
+</pre>
+
+<p>
+如果某个数据所在坐标系无法通过 TF 转换到 Fixed Frame，RViz 就无法正确显示该数据。
+</p>
+
+<p>
+因此 RViz 也常用于检查 TF 是否完整。
+</p>
+
+
+<h2>rqt</h2>
+
+<p>
+rqt 是 ROS 2 的图形化调试工具框架，包含多个插件。
+</p>
+
+<h3>rqt_graph</h3>
+
+<p>
+rqt_graph 用于显示节点与 Topic 之间的通信关系。
+</p>
+
+<pre>
+lidar_node
+    │
+  /scan
+    ↓
+slam_node
+    │
+   /map
+    ↓
+navigation_node
+</pre>
+
+<p>
+它适合分析大型 ROS 2 系统的数据流和节点连接关系。
+</p>
+
+<h3>rqt_plot</h3>
+
+<p>
+rqt_plot 用于将某些 Topic 中的数值数据随时间绘制成曲线。
+</p>
+
+<p>
+典型用途包括观察速度、传感器数据、控制误差和 PID 调试数据。
+</p>
+
+<h3>rqt_console</h3>
+
+<p>
+rqt_console 用于集中查看多个 ROS 2 节点输出的日志。
+</p>
+
+<p>
+在多节点系统中，可以通过日志级别和节点名称过滤信息。
+</p>
+
+
+<h2>ROS 2 核心概念之间的关系</h2>
+
+<pre>
+Workspace
+   │
+   └── Package
+          │
+          └── Node
+                │
+                ├── Topic
+                ├── Service
+                ├── Action
+                └── Parameter
+
+Topic / Service / Action
+          │
+          ↓
+       Interface
+          │
+          ↓
+         RMW
+          │
+          ↓
+         DDS
+          │
+          ↓
+        Network
+</pre>
+
+<p>
+工作空间负责管理整个项目。
+功能包负责组织代码和资源。
+节点负责运行具体功能。
+Topic、Service 和 Action 负责节点之间通信。
+Parameter 负责节点配置。
+Interface 负责定义通信数据格式。
+DDS 负责底层数据分发和网络通信。
+</p>
+
+<p>
+机器人模型和坐标系统之间的主要关系：
+</p>
+
+<pre>
+URDF
+ ↓
+robot_state_publisher
+ ↓
+TF
+ ↓
+RViz
+</pre>
+
+<p>
+URDF 负责描述机器人结构。
+robot_state_publisher 根据机器人模型生成 TF。
+TF 负责维护坐标系关系。
+RViz 根据 TF 将机器人模型和其他 ROS 数据显示在统一坐标系中。
+</p>
+
+
+<h2>实际项目中的典型数据流</h2>
+
+<p>
+移动机器人导航系统中常见的数据流如下：
+</p>
+
+<pre>
+LiDAR
+ ↓
+lidar_node
+ ↓
+/scan
+ ↓
+SLAM / Localization
+ ↓
+地图与机器人位置
+ ↓
+Navigation
+ ↓
+/cmd_vel
+ ↓
+base_node
+ ↓
+机器人运动
+ ↓
+/odom
+ ↓
+Localization
+</pre>
+
+<p>
+其中：
+</p>
+
+<p>
+激光雷达节点通过 Topic 发布 /scan。
+</p>
+
+<p>
+定位节点订阅 /scan 和 /odom，计算机器人位姿。
+</p>
+
+<p>
+导航节点通过 Action 接收导航目标。
+</p>
+
+<p>
+导航控制器通过 /cmd_vel 发布速度指令。
+</p>
+
+<p>
+底盘节点订阅 /cmd_vel 并驱动机器人运动，同时发布 /odom。
+</p>
+
+<p>
+URDF 描述机器人结构。
+</p>
+
+<p>
+TF 维护 map、odom、base_link、laser_link 等坐标系关系。
+</p>
+
+<p>
+Parameter 配置速度、控制频率、安全距离等运行参数。
+</p>
+
+<p>
+Launch 统一启动机器人相关节点和参数。
+</p>
+
+<p>
+Gazebo 用于仿真。
+</p>
+
+<p>
+RViz 用于可视化。
+</p>
+
+<p>
+rqt 用于分析节点和数据流。
+</p>
+
+
+<h2>阅读 ROS 2 项目的重点</h2>
+
+<p>
+阅读一个陌生节点时，应优先查找以下内容。
+</p>
+
+<p>
+create_publisher：判断节点向外输出哪些数据。
+</p>
+
+<p>
+create_subscription：判断节点需要哪些输入数据。
+</p>
+
+<p>
+create_service：判断节点对外提供哪些请求接口。
+</p>
+
+<p>
+create_client：判断节点调用哪些外部服务。
+</p>
+
+<p>
+ActionServer：判断节点负责执行哪些长时间任务。
+</p>
+
+<p>
+ActionClient：判断节点会向哪些模块发送任务。
+</p>
+
+<p>
+declare_parameter：判断节点有哪些可配置参数。
+</p>
+
+<p>
+create_timer：判断节点有哪些周期性任务。
+</p>
+
+<p>
+推荐结合以下命令分析系统：
+</p>
+
+<pre>
+ros2 node list
+ros2 node info /node_name
+ros2 topic list
+ros2 topic info /topic_name
+ros2 topic echo /topic_name
+ros2 service list
+ros2 action list
+ros2 param list
+ros2 interface show interface_type
+rqt_graph
+</pre>
+
+<p>
+分析 ROS 2 项目时，重点应放在节点职责、数据流、通信接口、参数配置和 TF 坐标关系上。
+</p>
+
+
+
+
+
+</div>
+</article>
+</main>
+
+<footer class="site-footer simple-footer">
+  <div class="simple-footer-inner">
+    <span>© 2026 杀手兔</span>
+    <nav aria-label="页脚导航">
+      <a href="../blog.html">文章</a>
+      <a href="../projects.html">项目</a>
+      <a href="../about.html">关于</a>
+      <a href="https://github.com/hildassd" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
